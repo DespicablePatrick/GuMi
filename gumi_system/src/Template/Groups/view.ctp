@@ -1,14 +1,18 @@
 <nav class="large-3 medium-4 columns" id="actions-sidebar">
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('Edit Group'), ['action' => 'edit', $group->id]) ?> </li>
-        <li><?= $this->Form->postLink(__('Delete Group'), ['action' => 'delete', $group->id], ['confirm' => __('Are you sure you want to delete # {0}?', $group->id)]) ?> </li>
+        <li><?php
+            $role = $this->request->session()->read('Auth.User.role');
+            if($role == 'admin' || $role == 'edu_admin'){
+                echo $this->Html->link(__('Edit Group Information'), ['action' => 'edit', $group->id]);
+            }?></li>
+        <li><?php
+            $role = $this->request->session()->read('Auth.User.role');
+            if($role == 'admin' || $role == 'edu_admin'){
+                echo $this->Form->postLink(__('Delete Group'), ['action' => 'delete', $group->id], ['confirm' => __('Are you sure you want to delete {0}?', $group->name)]);
+            }?></li>
         <li><?= $this->Html->link(__('List Groups'), ['action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New Group'), ['action' => 'add']) ?> </li>
-        <li><?= $this->Html->link(__('List Users'), ['controller' => 'Users', 'action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New User'), ['controller' => 'Users', 'action' => 'add']) ?> </li>
-        <li><?= $this->Html->link(__('List Students'), ['controller' => 'Students', 'action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New Student'), ['controller' => 'Students', 'action' => 'add']) ?> </li>
+
     </ul>
 </nav>
 <div class="groups view large-9 medium-8 columns content">
@@ -20,7 +24,7 @@
         </tr>
         <tr>
             <th><?= __('User') ?></th>
-            <td><?= $group->has('user') ? $this->Html->link($group->user->id, ['controller' => 'Users', 'action' => 'view', $group->user->id]) : '' ?></td>
+            <td><?= $group->has('user') ? $this->Html->link($group->user->name, ['controller' => 'Users', 'action' => 'view', $group->user->id]) : '' ?></td>
         </tr>
         <tr>
             <th><?= __('Week') ?></th>
@@ -42,18 +46,14 @@
             <tr>
                 <th><?= __('Id') ?></th>
                 <th><?= __('Name') ?></th>
-                <th><?= __('Group Id') ?></th>
                 <th class="actions"><?= __('Actions') ?></th>
             </tr>
             <?php foreach ($group->students as $students): ?>
             <tr>
                 <td><?= h($students->id) ?></td>
-                <td><?= h($students->name) ?></td>
-                <td><?= h($students->group_id) ?></td>
+                <td><?= $this->Html->link($students->name, ['controller' => 'Students', 'action' => 'view', $students->id]) ?></td>
                 <td class="actions">
-                    <?= $this->Html->link(__('View'), ['controller' => 'Students', 'action' => 'view', $students->id]) ?>
-                    <?= $this->Html->link(__('Edit'), ['controller' => 'Students', 'action' => 'edit', $students->id]) ?>
-                    <?= $this->Form->postLink(__('Delete'), ['controller' => 'Students', 'action' => 'delete', $students->id], ['confirm' => __('Are you sure you want to delete # {0}?', $students->id)]) ?>
+                    <?= $this->Form->postLink(__('Remove from Group'), ['controller' => 'Groups', 'action' => 'remove', $group->id, $students->id], ['confirm' => __('Are you sure you want to remove {0}  from {1} ?', $students->name , $group->name)]) ?>
                 </td>
             </tr>
             <?php endforeach; ?>

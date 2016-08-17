@@ -1,9 +1,11 @@
 <nav class="large-3 medium-4 columns" id="actions-sidebar">
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('New Student'), ['action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Groups'), ['controller' => 'Groups', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Group'), ['controller' => 'Groups', 'action' => 'add']) ?></li>
+        <li><?php
+            $role = $this->request->session()->read('Auth.User.role');
+            if($role == 'admin' || $role == 'edu_admin'){
+                echo $this->Html->link(__('New Student'), ['action' => 'add']);
+            }?></li>
     </ul>
 </nav>
 <div class="students index large-9 medium-8 columns content">

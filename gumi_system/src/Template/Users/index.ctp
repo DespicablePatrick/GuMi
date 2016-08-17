@@ -10,7 +10,7 @@
         <thead>
             <tr>
                 <th><?= $this->Paginator->sort('id') ?></th>
-                <th><?= $this->Paginator->sort('username') ?></th>
+                <th><?= $this->Paginator->sort('name') ?></th>
                 <!-- <th><?= $this->Paginator->sort('password') ?></th> -->
                 <th><?= $this->Paginator->sort('role') ?></th>
                 <th><?= $this->Paginator->sort('created') ?></th>
@@ -22,7 +22,7 @@
             <?php foreach ($users as $user): ?>
             <tr>
                 <td><?= $this->Number->format($user->id) ?></td>
-                <td><?= h($user->username) ?></td>
+                <td><?= h($user->name) ?></td>
                 <!-- <td><?= h($user->password) ?></td> -->
                 <td><?= h($user->role) ?></td>
                 <td><?= h($user->created) ?></td>

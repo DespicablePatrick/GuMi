@@ -10,7 +10,7 @@
         <thead>
             <tr>
                 <!-- <th><?= $this->Paginator->sort('id') ?></th> -->
-                <th><?= $this->Paginator->sort('user_id') ?></th>
+                <th><?= $this->Paginator->sort('user_id',['label' => __('Teacher')]) ?></th>
                 <th><?= $this->Paginator->sort('student_id') ?></th>
                 <th><?= $this->Paginator->sort('weekday') ?></th>
                 <th><?= $this->Paginator->sort('start_time') ?></th>
@@ -32,7 +32,7 @@
                 <td class="actions">
                     <?= $this->Html->link(__('View'), ['action' => 'view', $course->id]) ?>
                     <?= $this->Html->link(__('Edit'), ['action' => 'edit', $course->id]) ?>
-                    <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $course->id], ['confirm' => __('Are you sure you want to delete # {0}?', $course->id)]) ?>
+                    <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $course->id], ['confirm' => __('Are you sure you want to delete this course?')]) ?>
                 </td>
             </tr>
             <?php endforeach; ?>

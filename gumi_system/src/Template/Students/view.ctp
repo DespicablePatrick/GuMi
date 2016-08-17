@@ -1,12 +1,17 @@
 <nav class="large-3 medium-4 columns" id="actions-sidebar">
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('Edit Student'), ['action' => 'edit', $student->id]) ?> </li>
-        <li><?= $this->Form->postLink(__('Delete Student'), ['action' => 'delete', $student->id], ['confirm' => __('Are you sure you want to delete # {0}?', $student->id)]) ?> </li>
+        <li><?php
+            $role = $this->request->session()->read('Auth.User.role');
+            if($role == 'admin' || $role == 'edu_admin'){
+                echo $this->Html->link(__('Edit Student Information'), ['action' => 'edit', $student->id]);
+            }?></li>
+        <li><?php
+            $role = $this->request->session()->read('Auth.User.role');
+            if($role == 'admin' || $role == 'edu_admin'){
+                echo $this->Form->postLink(__('Delete Student'), ['action' => 'delete', $student->id], ['confirm' => __('Are you sure you want to delete {0}?', $student->name)]);
+            }?></li>
         <li><?= $this->Html->link(__('List Students'), ['action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New Student'), ['action' => 'add']) ?> </li>
-        <li><?= $this->Html->link(__('List Groups'), ['controller' => 'Groups', 'action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New Group'), ['controller' => 'Groups', 'action' => 'add']) ?> </li>
     </ul>
 </nav>
 <div class="students view large-9 medium-8 columns content">

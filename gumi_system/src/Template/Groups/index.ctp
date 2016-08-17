@@ -1,11 +1,11 @@
 <nav class="large-3 medium-4 columns" id="actions-sidebar">
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('New Group'), ['action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Users'), ['controller' => 'Users', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New User'), ['controller' => 'Users', 'action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Students'), ['controller' => 'Students', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Student'), ['controller' => 'Students', 'action' => 'add']) ?></li>
+        <li><?php
+            $role = $this->request->session()->read('Auth.User.role');
+            if($role == 'admin' || $role == 'edu_admin'){
+                echo $this->Html->link(__('New Group'), ['action' => 'add']);
+            }?></li>
     </ul>
 </nav>
 <div class="groups index large-9 medium-8 columns content">
@@ -26,7 +26,7 @@
             <tr>
                 <td><?= $this->Number->format($group->id) ?></td>
                 <td><?= h($group->name) ?></td>
-                <td><?= $group->has('user') ? $this->Html->link($group->user->id, ['controller' => 'Users', 'action' => 'view', $group->user->id]) : '' ?></td>
+                <td><?= $group->has('user') ? $this->Html->link($group->user->name, ['controller' => 'Users', 'action' => 'view', $group->user->id]) : '' ?></td>
                 <td><?= h($group->week) ?></td>
                 <td><?= h($group->time_slot) ?></td>
                 <td class="actions">

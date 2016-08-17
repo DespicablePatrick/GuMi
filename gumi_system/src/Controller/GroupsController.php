@@ -74,7 +74,11 @@ class GroupsController extends AppController
                 $this->Flash->error(__('The group could not be saved. Please, try again.'));
             }
         }
-        $users = $this->Groups->Users->find('list', ['limit' => 200]);
+        $users = $this->Groups->Users->find('list', [
+            'limit' => 200,
+            'keyField' => 'id',
+            'valueField' => 'name'
+        ]);
         $this->set(compact('group', 'users'));
         $this->set('_serialize', ['group']);
     }
@@ -96,12 +100,16 @@ class GroupsController extends AppController
             if ($this->Groups->save($group)) {
                 $this->Flash->success(__('The group has been saved.'));
 
-                return $this->redirect(['action' => 'index']);
+                return $this->redirect(['action' => 'view', $group->id]);
             } else {
                 $this->Flash->error(__('The group could not be saved. Please, try again.'));
             }
         }
-        $users = $this->Groups->Users->find('list', ['limit' => 200]);
+        $users = $this->Groups->Users->find('list', [
+            'limit' => 200,
+            'keyField' => 'id',
+            'valueField' => 'name'
+        ]);
         $this->set(compact('group', 'users'));
         $this->set('_serialize', ['group']);
     }

@@ -7,9 +7,7 @@
                 ['confirm' => __('Are you sure you want to delete # {0}?', $student->id)]
             )
         ?></li>
-        <li><?= $this->Html->link(__('List Students'), ['action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('List Groups'), ['controller' => 'Groups', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Group'), ['controller' => 'Groups', 'action' => 'add']) ?></li>
+        <li><?= $this->Html->link(__('Go Back'), ['action' => 'view', $student->id]) ?></li>
     </ul>
 </nav>
 <div class="students form large-9 medium-8 columns content">
