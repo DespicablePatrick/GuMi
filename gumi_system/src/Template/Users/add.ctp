@@ -10,9 +10,10 @@
         <legend><?= __('Add User') ?></legend>
         <?php
             echo $this->Form->input('username');
+            echo $this->Form->input('name');
             echo $this->Form->input('password');
             echo $this->Form->input('role', [
-                'options' => ['admin' => 'Admin', 'teacher' => 'Teacher', 'finance' => 'Finance', 'edu_admin' => 'Education Admin', 'consult' => 'Consult']
+                'options' => ['admin' => __('Admin'), 'teacher' => __('Teacher'), 'finance' => __('Finance'), 'edu_admin' => __('Education Admin'), 'consult' => _('Consult')]
             ]);
         ?>
     </fieldset>

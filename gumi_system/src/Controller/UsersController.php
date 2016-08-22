@@ -3,6 +3,9 @@ namespace App\Controller;
 
 use App\Controller\AppController;
 use Cake\Event\Event;
+use Cake\I18n\I18n;
+
+
 
 /**
  * Users Controller
@@ -148,4 +151,20 @@ class UsersController extends AppController
 
         return $this->redirect(['action' => 'index']);
     }
+
+    // public function changeLanguage($lang){
+    //     if($lang == 'en_US'){
+    //         I18n::locale('en_US');
+    //         $this->request->session()->write([
+    //             'Config.language' => 'en_US',
+    //         ]);
+    //     }
+    //     else if($lang == 'zh_CN'){
+    //         I18n::locale('zh_CN');
+    //         $this->request->session()->write([
+    //             'Config.language' => 'zh_CN',
+    //         ]);
+    //     }
+    //     return $this->redirect($this->referer());
+    // }
 }
